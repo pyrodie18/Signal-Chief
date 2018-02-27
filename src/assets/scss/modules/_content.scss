@@ -1,0 +1,65 @@
+.main-container {
+  @include xy-grid-container;
+}
+
+.main-grid {
+  @include xy-grid();
+  margin-top: 1rem;
+
+  @include breakpoint(medium) {
+    margin-top: 3rem;
+  }
+
+  &.sidebar-left {
+    // Place the sidebar below main content on small screens ...
+    @include breakpoint(small) {
+      .main-content { order: 1; }
+      .sidebar { order: 2; }
+    }
+
+    // ... and to the left on medium-up screens, when using the sidebar-left template
+    @include breakpoint(medium) {
+      .main-content { order: 2; }
+      .sidebar { order: 1; }
+    }
+  }
+
+  // Full width template
+  .main-content-full-width {
+    @include xy-cell(12);
+  }
+
+  // Default template
+  .main-content {
+    background-color: $white;
+    @include breakpoint(small) {
+      @include xy-cell(12);
+      padding-left: 15px;
+      padding-right: 15px;
+      border-style: solid;
+      border-radius: 10px;
+    }
+
+    @include breakpoint(medium) {
+      @include xy-cell(9);
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  .sidebar {
+    background-color: $white;
+    @include breakpoint(small) {
+      @include xy-cell(12);
+    }
+
+    @include breakpoint(medium) {
+      @include xy-cell(3);
+      padding-left: 15px;
+      padding-right: 15px;
+      margin-top: 0px;
+      border-style: solid;
+      border-radius: 10px;
+    }
+  }
+}
