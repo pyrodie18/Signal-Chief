@@ -14,35 +14,35 @@
 @include foundation-button;
 @include foundation-forms;
 // @include foundation-range-input;
-@include foundation-accordion;
-@include foundation-accordion-menu;
-@include foundation-badge;
-@include foundation-breadcrumbs;
+//@include foundation-accordion;
+//@include foundation-accordion-menu;
+//@include foundation-badge;
+//@include foundation-breadcrumbs;
 @include foundation-button-group;
 @include foundation-callout;
 @include foundation-card;
-@include foundation-close-button;
+//@include foundation-close-button;
 @include foundation-menu;
 @include foundation-menu-icon;
 @include foundation-drilldown-menu;
-@include foundation-dropdown;
-@include foundation-dropdown-menu;
+//@include foundation-dropdown;
+//@include foundation-dropdown-menu;
 @include foundation-responsive-embed;
-@include foundation-label;
+//@include foundation-label;
 @include foundation-media-object;
 @include foundation-off-canvas;
-@include foundation-orbit;
+//@include foundation-orbit;
 @include foundation-pagination;
-@include foundation-progress-bar;
-@include foundation-slider;
+//@include foundation-progress-bar;
+//@include foundation-slider;
 @include foundation-sticky;
-@include foundation-reveal;
-@include foundation-switch;
+//@include foundation-reveal;
+//@include foundation-switch;
 @include foundation-table;
-@include foundation-tabs;
+//@include foundation-tabs;
 @include foundation-thumbnail;
 @include foundation-title-bar;
-@include foundation-tooltip;
+//@include foundation-tooltip;
 @include foundation-top-bar;
 @include foundation-visibility-classes;
 // @include foundation-float-classes;
@@ -50,8 +50,8 @@
 
 // @include foundation-prototype-classes;
 
-@include motion-ui-transitions;
-@include motion-ui-animations;
+//@include motion-ui-transitions;
+//@include motion-ui-animations;
 
 /*
   My custom styles:
@@ -82,6 +82,7 @@
 //@import "templates/kitchen-sink";
 
 
+
 // Article Sytling
 article {
   border-bottom-style: ridge;
@@ -101,6 +102,8 @@ article {
   margin-left: auto;
   margin-right: auto;
   max-width: 80%;
+  width: auto;
+  max-height: 600px;
   height: auto;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -116,6 +119,7 @@ article {
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 10px;
+  border-style: none;
 }
 
 .site-banner {
@@ -141,7 +145,7 @@ article {
 @import url('https://fonts.googleapis.com/css?family=Montez');
 @import url(https://fonts.googleapis.com/css?family=Francois+One);
 
-blockquote{
+blockquote, article aside{
   display:block;
   background: #fff;
   padding: 15px 20px 15px 45px;
@@ -166,9 +170,20 @@ blockquote{
   border-right-width: 2px;
 }
 
-blockquote::before{
-  content: "\201C"; /*Unicode for Left Double Quote*/
+article aside {
+  //Min side to make sure first character doesn't overrun
+  min-height: 80px;
+}
 
+blockquote::before {
+  content: "\201C"; /*Unicode for Left Double Quote*/
+}
+
+article aside::before {
+  content: "\007B"; /*Unicode for Left Double Quote*/
+}
+
+blockquote::before, article aside::before{
   /*Font*/
   font-family: Georgia, serif;
   font-size: 60px;
@@ -182,12 +197,12 @@ blockquote::before{
 
 }
 
-blockquote::after{
+blockquote::after, article aside::after{
   /*Reset to make sure*/
   content: "";
 }
 
-blockquote a{
+blockquote a, article aside a{
   text-decoration: none;
   background: #eee;
   cursor: pointer;
@@ -195,82 +210,82 @@ blockquote a{
   color: #c76c0c;
 }
 
-blockquote a:hover{
+blockquote a:hover, article aside a:hover{
   color: #666;
 }
 
-blockquote em{
+blockquote em, article aside em{
   font-style: italic;
 }
 
 /*Default Color Palette*/
-blockquote.default{
+blockquote.default, article aside.default{
   border-left-color: #656d77;
   border-right-color: #434a53;
 }
 
 /*Grapefruit Color Palette*/
-blockquote.grapefruit{
+blockquote.grapefruit, article aside.grapefruit{
   border-left-color: #ed5565;
   border-right-color: #da4453;
 }
 
 /*Bittersweet Color Palette*/
-blockquote.bittersweet{
+blockquote.bittersweet, article aside.bittersweet{
   border-left-color: #fc6d58;
   border-right-color: #e95546;
 }
 
 /*Sunflower Color Palette*/
-blockquote.sunflower{
+blockquote.sunflower, article aside.sunflower{
   border-left-color: #ffcd69;
   border-right-color: #f6ba59;
 }
 
 /*Grass Color Palette*/
-blockquote.grass{
+blockquote.grass, article aside.grass{
   border-left-color: #9fd477;
   border-right-color: #8bc163;
 }
 
 /*Mint Color Palette*/
-blockquote.mint{
+blockquote.mint, article aside.mint{
   border-left-color: #46cfb0;
   border-right-color: #34bc9d;
 }
 
 /*Aqua Color Palette*/
-blockquote.aqua{
+blockquote.aqua, article aside.aqua{
   border-left-color: #4fc2e5;
   border-right-color: #3bb0d6;
 }
 
 /*Blue Jeans Color Palette*/
-blockquote.bluejeans{
+blockquote.bluejeans, article aside.bluejeans{
   border-left-color: #5e9de6;
   border-right-color: #4b8ad6;
 }
 
 /*Lavander Color Palette*/
-blockquote.lavander{
+blockquote.lavander, article aside.lavander{
   border-left-color: #ad93e6;
   border-right-color: #977bd5;
 }
 
 /*Pinkrose Color Palette*/
-blockquote.pinkrose{
+blockquote.pinkrose, article aside.pinkrose{
   border-left-color: #ed87bd;
   border-right-color: #d870a9;
 }
 
 /*Light Color Palette*/
-blockquote.light{
+blockquote.light, article aside.light{
   border-left-color: #f5f7fa;
   border-right-color: #e6e9ed;
 }
 
 /*Gray Color Palette*/
-blockquote.gray{
+blockquote.gray, article aside.gray{
   border-left-color: #ccd1d8;
   border-right-color: #aab2bc;
 }
@@ -345,3 +360,44 @@ blockquote.gray{
 .gallery-columns-9 .gallery-item:nth-child(9n+1) {
   clear: left;
 }
+
+//Fix editor style
+#tinymce {
+  background-color: white;
+}
+
+div.entry-content img {
+  border-color: black;
+  border-style: solid;
+  border-width: 3px;
+}
+
+// Image allignement
+.alignright {
+  padding-left: 0rem;
+  margin-left: 1rem;
+}
+
+.alignnone {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.aligncenter {
+    img {
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+  .wp-caption-text {
+    text-align: center;
+  }
+}
+
+.wp-sticky {
+  border-style: dotted;
+  padding-left: 5px;
+  background: lightgray;
+}
+

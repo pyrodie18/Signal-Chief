@@ -8,13 +8,33 @@
 
 get_header(); ?>
 
-<?php get_template_part( 'template-parts/featured-image' ); ?>
 <div class="main-container">
 	<div class="main-grid">
 		<main class="main-content">
 			<?php while ( have_posts() ) : the_post(); ?>
-				<?php get_template_part( 'template-parts/content', '' ); ?>
-				<?php the_post_navigation(); ?>
+
+                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                    <header>
+                        <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+                        <?php SignalChief_get_author_date(); ?>
+                    </header>
+                    <div class="entry-content">
+                        <?php the_content(); ?>
+                    </div>
+                    <footer>
+                        <?php
+                        wp_link_pages(
+                            array(
+                                'before' => '<nav id="page-nav"><p>' . __( 'Pages:', 'foundationpress' ),
+                                'after'  => '</p></nav>',
+                            )
+                        );
+                        ?>
+                        <?php $tag = get_the_tags(); if ( $tag ) { ?><p><?php the_tags(); ?></p><?php } ?>
+                    </footer>
+                </article>
+
+
 				<?php comments_template(); ?>
 			<?php endwhile; ?>
 		</main>

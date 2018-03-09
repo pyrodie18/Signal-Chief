@@ -27,8 +27,8 @@ require_once( 'library/class-foundationpress-comments.php' );
 require_once( 'library/navigation.php' );
 
 /** Add menu walkers for top-bar and off-canvas */
-require_once( 'library/class-foundationpress-top-bar-walker.php' );
-require_once( 'library/class-foundationpress-mobile-walker.php' );
+//require_once( 'library/class-foundationpress-top-bar-walker.php' );
+//require_once( 'library/class-foundationpress-mobile-walker.php' );
 
 /** Create widget areas in sidebar and footer */
 require_once( 'library/widget-areas.php' );
@@ -53,3 +53,54 @@ require_once( 'library/responsive-images.php' );
 
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );
+
+
+// Use First Video as Excerpt
+$postcustom = get_post_custom_keys();
+if ($postcustom){
+    $i = 1;
+    foreach ($postcustom as $key){
+        if (strpos($key,'oembed')){
+            foreach (get_post_custom_values($key) as $video){
+                if ($i == 1){
+                    $text = $video.$text;
+                }
+                $i++;
+            }
+        }
+    }
+}
+
+// Custom Excerpt
+function custom_wp_trim_excerpt($text) {
+    $raw_excerpt = $text;
+    if ( '' == $text ) {
+        $text = get_the_content(''); // Original Content
+        $text = strip_shortcodes($text); // Minus Shortcodes
+        $text = apply_filters('the_content', $text); // Filters
+        $text = str_replace(']]>', ']]&gt;', $text); // Replace
+
+        $excerpt_length = apply_filters('excerpt_length', 55); // Length
+        $excerpt_more = apply_filters('excerpt_more', ' ' . '<a class="readmore" href="'. get_permalink() .'">&raquo;</a>');
+        $text = wp_trim_words( $text, $excerpt_length, $excerpt_more );
+
+        // Use First Video as Excerpt
+        $postcustom = get_post_custom_keys();
+        if ($postcustom){
+            $i = 1;
+            foreach ($postcustom as $key){
+                if (strpos($key,'oembed')){
+                    foreach (get_post_custom_values($key) as $video){
+                        if ($i == 1){
+                            $text = $video.$text;
+                        }
+                        $i++;
+                    }
+                }
+            }
+        }
+    }
+    return apply_filters('wp_trim_excerpt', $text, $raw_excerpt);
+}
+remove_filter('get_the_excerpt', 'wp_trim_excerpt');
+add_filter('get_the_excerpt', 'custom_wp_trim_excerpt');
